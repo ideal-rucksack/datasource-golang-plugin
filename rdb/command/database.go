@@ -1,11 +1,16 @@
 package command
 
-import "github.com/ideal-rucksack/datasource-golang-plugin/rdb"
+import (
+	"fmt"
+	"github.com/ideal-rucksack/datasource-golang-plugin/rdb"
+)
 
 type DatabaseCommand struct {
-	client rdb.Client
+	Client rdb.Client
 }
 
-func (d *DatabaseCommand) Execute() ([]string, error) {
-	return d.client.Databases()
+func (d DatabaseCommand) Execute() error {
+	databases, err := d.Client.Databases()
+	fmt.Printf("database: %s", databases)
+	return err
 }
