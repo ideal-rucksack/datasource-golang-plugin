@@ -4,7 +4,7 @@ type commandFactory func(Client) Command
 
 var commandRegistry = map[string]commandFactory{}
 
-func registerCommand(name string, factory commandFactory) {
+func RegisterCommand(name string, factory commandFactory) {
 	commandRegistry[name] = factory
 }
 
