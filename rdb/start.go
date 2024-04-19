@@ -7,10 +7,10 @@ import (
 )
 
 type ExecCommand struct {
-	Action      *string
-	Credentials *string
-	Webhook     *string
-	Secret      *string
+	Action      string
+	Credentials string
+	Webhook     string
+	Secret      string
 }
 
 type Connection struct {
@@ -42,10 +42,10 @@ func Run() (*ExecCommand, error) {
 	}
 
 	return &ExecCommand{
-		Action:      &action,
-		Credentials: &connJson,
-		Webhook:     &webhookURL,
-		Secret:      &secret,
+		Action:      action,
+		Credentials: connJson,
+		Webhook:     webhookURL,
+		Secret:      secret,
 	}, nil
 
 }
