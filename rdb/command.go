@@ -10,7 +10,7 @@ type Command[T any] interface {
 }
 
 type NotifyRequest[T any] struct {
-	status  int
-	error   *string
-	payload T
+	Status  int     `json:"status"`
+	Error   *string `json:"error"`
+	Payload T       `json:"payload"`
 }
