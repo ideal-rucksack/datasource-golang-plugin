@@ -11,13 +11,13 @@ type DatabaseCommand struct {
 	Client rdb.Client
 }
 
-func (d DatabaseCommand) Execute() (any, error) {
+func (d DatabaseCommand) Execute() (*[]string, error) {
 	var err error
 	databases, err := d.Client.Databases()
 	if err != nil {
 		return nil, err
 	}
-	return databases, nil
+	return &databases, nil
 }
 
 func (d DatabaseCommand) Notify(args rdb.ExecCommand, payload rdb.NotifyRequest[*[]string]) error {
