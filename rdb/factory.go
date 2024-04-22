@@ -1,22 +1,22 @@
 package rdb
 
-type CommandFactory[T any] func(Client) Command[T]
+type CommandFactory func(Client) Command
 
-type CommandFactoryRegistry[T any] struct {
-	factories map[string]CommandFactory[T]
+type CommandFactoryRegistry struct {
+	factories map[string]CommandFactory
 }
 
-func NewCommandFactoryRegistry[T any]() *CommandFactoryRegistry[T] {
-	return &CommandFactoryRegistry[T]{
-		factories: make(map[string]CommandFactory[T]),
+func NewCommandFactoryRegistry() *CommandFactoryRegistry {
+	return &CommandFactoryRegistry{
+		factories: make(map[string]CommandFactory),
 	}
 }
 
-func (r *CommandFactoryRegistry[T]) Register(name string, factory CommandFactory[T]) {
+func (r *CommandFactoryRegistry) Register(name string, factory CommandFactory) {
 	r.factories[name] = factory
 }
 
-func (r *CommandFactoryRegistry[T]) GetCommand(name string, client Client) (Command[T], bool) {
+func (r *CommandFactoryRegistry) GetCommand(name string, client Client) (Command, bool) {
 	factory, ok := r.factories[name]
 	if !ok {
 		return nil, false
