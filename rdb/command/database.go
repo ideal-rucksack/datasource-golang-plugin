@@ -20,7 +20,7 @@ func (d DatabaseCommand) Execute() (any, error) {
 	return databases, nil
 }
 
-func (d DatabaseCommand) Notify(args rdb.ExecCommand, payload rdb.NotifyRequest) error {
+func (d DatabaseCommand) Notify(args rdb.ExecCommand, payload rdb.NotifyRequest[*[]string]) error {
 	body, err := json.Marshal(payload)
 	if err != nil {
 		return err
