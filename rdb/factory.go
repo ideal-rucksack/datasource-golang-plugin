@@ -8,8 +8,8 @@ func RegisterCommand(name string, factory commandFactory) {
 	commandRegistry[name] = factory
 }
 
-func GewCommand(api string, client Client) Command {
-	if factory, ok := commandRegistry[api]; ok {
+func GetCommand(action string, client Client) Command {
+	if factory, ok := commandRegistry[action]; ok {
 		return factory(client)
 	}
 	return nil
