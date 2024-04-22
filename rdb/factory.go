@@ -16,10 +16,11 @@ func (r *CommandFactoryRegistry[T]) Register(name string, factory CommandFactory
 	r.factories[name] = factory
 }
 
-func (r *CommandFactoryRegistry[T]) GetCommand(name string, client Client) (Command[T], bool) {
+func (r *CommandFactoryRegistry[T]) GetCommand(name string, client Client) *Command[T] {
 	factory, ok := r.factories[name]
 	if !ok {
-		return nil, false
+		return nil
 	}
-	return factory(client), true
+	c := factory(client)
+	return &c
 }
